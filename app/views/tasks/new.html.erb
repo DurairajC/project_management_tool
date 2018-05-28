@@ -1,0 +1,53 @@
+<h1>New Tasks</h1>
+
+<%= form_for @task do |f| %>
+
+<% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@task.errors.count, "error") %> 
+      </h2>
+      <ul>
+        <% @task.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<table>
+	
+	<tr>
+		<td><%= f.label :task_name %></td>
+		<td><%= f.text_field :name %></td>
+	</tr>
+
+	<tr>
+		<td><%= f.label :assign_to %></td>
+		<td>
+			<% options = options_from_collection_for_select(@developers, 'id', 'name') %>
+			<%= f.select :assigned_to,  options %>
+		</td>
+	</tr>
+
+	<tr>
+		<td><%= f.label :start_date %></td>
+		<td><%= f.date_field :start_date %></td>
+	</tr>
+
+	<tr>
+		<td><%= f.label :end_date %></td>
+		<td><%= f.date_field :end_date %></td>
+	</tr>
+
+	<tr>
+		<td><%= hidden_field_tag 'project_id', params[:id] %></td>
+		<td><%= f.submit %></td>
+	</tr>
+
+</table>
+
+<% end %>
+
+<br/><br/>
+<%= link_to 'All Projects', projects_path %>

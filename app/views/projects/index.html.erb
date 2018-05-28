@@ -1,0 +1,49 @@
+<% if current_user.role == 1 %>
+<h1>Projects List</h1>
+<%= link_to 'New Project', new_project_path %> 
+<br/><br/>
+<% end %>
+
+<% if @all_projects != [] %>
+
+<table border="1">
+	<tr>
+	    <th>Project Name</th>
+	    <th>Start Date</th>
+	    <th>End Date</th>
+	    <th></th>
+  	</tr>
+
+<% @all_projects.each do |project| %>
+
+	<tr>
+		<td><%= project.name %></td>
+		<td><%= project.start_date %></td>
+		<td><%= project.end_date %></td>
+		<td><%= link_to 'Project tasks', project_path(project) %></td>
+	</tr>
+
+<% end %>
+
+</table>
+<br/><br/>
+<% else %>
+	<% if current_user.role == 1 %>
+		<h3> No projects to Display. Add new projects using above link. </h3>
+		<br/><br/>
+	<% end %>
+<% end %>
+
+<h1> projects todo list </h1>
+
+<% if @project_size %>
+
+	<% if current_user.role == 1 %>
+		<%= render partial: "admin_view" %>
+	<% elsif current_user.role == 2 %>
+		<%= render partial: "developer_view" %>	
+	<% end %>
+
+<% else %>
+	<h3> No projects to Display. Add new projects using above link. </h3>
+<% end %>

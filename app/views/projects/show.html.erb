@@ -1,0 +1,42 @@
+<h1>Project Details</h1>
+
+<table border="1">
+	<tr>
+		<td> Project Name </td>
+		<td> <%=@project.name%> </td>
+	</tr>
+</table> <br/>
+
+<%= link_to 'Create new tasks', new_task_path(:id => params[:id]) %> 
+
+<% if @tasks != [] %>
+<br/><br/>
+<table border="1">
+	<tr>
+	    <th>Task Name</th>
+	    <th>Assigned To</th>
+	    <th>Status</th>
+	    <th>Start Date</th>
+	    <th>End Date</th>	    
+  	</tr>
+
+
+<% @tasks.each do |task| %>
+
+	<tr>
+		<td><%= task.name %></td>
+		<td><%= task.user.name %></td>
+		<td><%= task_status(task.status) %></td>
+		<td><%= task.start_date %></td>
+		<td><%= task.end_date %></td>
+	</tr>
+
+<% end %>
+
+</table>
+
+<% end %>
+
+<br/><br/>
+
+<%= link_to 'All Projects', projects_path %> 

@@ -1,0 +1,44 @@
+<table border="1">
+
+<tr>
+	
+	<th> Status </th>
+
+	<% @projects.each do |project| %>
+		<th> <%= project.name %> </th>
+	<% end %>
+
+</tr>
+
+<tr>
+
+	<td> Done </td>
+
+	<% @projects.each do |project| %>
+		<td> <%= project.tasks.user_tasks_done.collect(&:name) != [] ? project.tasks.user_tasks_done.collect{|x| link_to(x.name, edit_task_path(x.id))}.join("<br>").html_safe : "" %> </td>
+	<% end %>	
+
+</tr>
+
+<tr>
+	
+	<td> In Progress </td>
+
+	<% @projects.each do |project| %>
+		<td> <%= project.tasks.user_tasks_inprogress.collect(&:name) != [] ? project.tasks.user_tasks_inprogress.collect{|x| link_to(x.name, edit_task_path(x.id))}.join("<br>").html_safe : "" %> </td>
+	<% end %>
+	
+</tr>
+
+<tr>
+	
+	<td> New </td>
+
+	<% @projects.each do |project| %>
+		<td> <%= project.tasks.user_tasks_new.collect(&:name) != [] ? project.tasks.user_tasks_new.collect{|x| link_to(x.name, edit_task_path(x.id))}.join("<br>").html_safe : "" %> </td>
+	<% end %>
+	
+</tr>
+
+
+</table>

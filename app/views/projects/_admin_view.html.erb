@@ -1,0 +1,44 @@
+<table border="1">
+
+<tr>
+	
+	<th> Status </th>
+
+	<% @developers.each do |user| %>
+		<th> <%= user.name %> </th>
+	<% end %>
+
+</tr>
+
+<tr>
+
+	<td> Done </td>
+
+	<% @developers.each do |user| %>
+		<td> <%= user.tasks.tasks_done.collect(&:name) != [] ? user.tasks.tasks_done.collect(&:name).join("<br>").html_safe : ""  %> </td>
+	<% end %>	
+
+</tr>
+
+<tr>
+	
+	<td> In Progress </td>
+
+	<% @developers.each do |user| %>
+		<td> <%= user.tasks.inprogres_tasks.collect(&:name) != [] ? user.tasks.inprogres_tasks.collect(&:name).join("<br>").html_safe : "" %> </td>
+	<% end %>
+	
+</tr>
+
+<tr>
+	
+	<td> New </td>
+
+	<% @developers.each do |user| %>
+		<td> <%= user.tasks.new_tasks.collect(&:name) != [] ? user.tasks.new_tasks.collect(&:name).join("<br>").html_safe : "" %> </td>
+	<% end %>
+	
+</tr>
+
+
+</table>

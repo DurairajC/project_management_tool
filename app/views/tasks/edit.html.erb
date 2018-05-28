@@ -1,0 +1,32 @@
+<h1>Task Details</h1>
+
+<%= form_for @task do |f| %>
+
+<table border="1">
+	<tr>
+		<td> Project Name </td>
+		<td> <%=@project.name%> </td>
+	</tr>
+	
+	<tr>
+	    <td> Task Name</td>
+	    <td> <%= @task.name %> </td>
+	</tr>
+	
+	<tr>
+	    <td>Status</td>
+	    <td> <%= f.select(:status, options_for_select([["New",1],["In Progress",2],["Done",3]], @task.status ), class:"select") %> </td>
+	</tr>
+	
+	<tr>
+	    <td></td>
+	    <td><%= f.submit %></td>
+	</tr>
+	
+</table> <br/>
+
+<% end %>
+
+<br/><br/>
+
+<%= link_to 'All Projects', projects_path %>
